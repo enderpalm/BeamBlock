@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "beampass",
+  "id": "beam-block",
   "version": "${version}",
 
-  "name": "BeamPass Mod",
-  "description": "A mod that will let beacon beam pass through some blocks like the lodestone! ",
+  "name": "BeamBlock Mod",
+  "description": "Fork of BeamPass Mod by Emafire003 to selectively block beam instead of allowing beam to penetrate",
   "authors": [
-    "Emafire003"
+    "Emafire003",
+    "Enderpalm"
   ],
   "contact": {
     "homepage": "https://github.com/Emafire003/BeamPass",
@@ -20,10 +21,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.emafire003.dev.beampass.BeamPass"
+      "me.emafire003.dev.beampass.BeamBlock"
     ],
     "preLaunch": [
-      "me.emafire003.dev.beampass.BeamPassPreLaunch"
+      "me.emafire003.dev.beampass.BeamBlockPreLaunch"
     ]
   },
   "mixins": [
@@ -34,8 +35,5 @@
     "fabricloader": ">=0.14.8",
     "minecraft": ">=1.17-",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

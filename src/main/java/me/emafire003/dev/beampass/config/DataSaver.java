@@ -2,7 +2,7 @@ package me.emafire003.dev.beampass.config;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import me.emafire003.dev.beampass.BeamPass;
+import me.emafire003.dev.beampass.BeamBlock;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -12,12 +12,11 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static me.emafire003.dev.beampass.BeamPass.LOGGER;
+import static me.emafire003.dev.beampass.BeamBlock.LOGGER;
 
 public class DataSaver {
 
-    public static String PATH = String.valueOf(FabricLoader.getInstance().getConfigDir().resolve("beampass_blocklist.json"));
-    @SuppressWarnings("UnstableApiUsage")
+    public static String PATH = String.valueOf(FabricLoader.getInstance().getConfigDir().resolve("beam_block_blocklist.json"));
     public static Type blockBypassListToken = new TypeToken<List<String>>(){}.getType();
 
     static Gson gson = new Gson();
@@ -44,7 +43,7 @@ public class DataSaver {
         try {
             FileWriter datafileWriter = new FileWriter(PATH);
             String head = gson.toJson("Here is a list of blocks that will be bypassed by the beacon beam") +"\n";
-            String blockList = gson.toJson(BeamPass.bypassableBlocksIds) + "\n";
+            String blockList = gson.toJson(BeamBlock.beamDisablingBlocksIds) + "\n";
 
             datafileWriter.write(head);
             datafileWriter.append(blockList);
@@ -65,8 +64,7 @@ public class DataSaver {
         BufferedReader readbuffer = new BufferedReader(file);
         for (lineNumber = 1; lineNumber < 10; lineNumber++) {
             if (lineNumber == line) {
-                String the_line = readbuffer.readLine();
-                return the_line;
+                return readbuffer.readLine();
             } else{
                 readbuffer.readLine();
             }
@@ -83,7 +81,7 @@ public class DataSaver {
                 return null;
             }
             List<String> list = gson.fromJson(line, blockBypassListToken);
-            return BeamPass.convertToBlockList(list);
+            return BeamBlock.convertToBlockList(list);
         } catch (NoSuchElementException e){
             return null;
         } catch (IOException e) {

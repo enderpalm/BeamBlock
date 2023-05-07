@@ -11,15 +11,15 @@ public class BeamCommands {
 
     //Based on Factions' code https://github.com/ickerio/factions
     public static void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-        LiteralCommandNode<ServerCommandSource> lightcommands = CommandManager
+        LiteralCommandNode<ServerCommandSource> lightCommands = CommandManager
                 .literal("beam")
                 .build();
 
         LiteralCommandNode<ServerCommandSource> alias = CommandManager
-                .literal("beampass")
+                .literal("beamblock")
                 .build();
 
-        dispatcher.getRoot().addChild(lightcommands);
+        dispatcher.getRoot().addChild(lightCommands);
         dispatcher.getRoot().addChild(alias);
 
         BeamCommand[] commands = new BeamCommand[] {
@@ -29,7 +29,7 @@ public class BeamCommands {
         };
 
         for (BeamCommand command : commands) {
-            lightcommands.addChild(command.getNode());
+            lightCommands.addChild(command.getNode());
             alias.addChild(command.getNode());
         }
     }
